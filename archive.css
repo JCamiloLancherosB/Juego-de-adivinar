@@ -8,7 +8,7 @@ body, html {
 body {
     background-image: url(/Imagenes/cielo-colorido-nubes-palabras-nublan.jpg);
     background-repeat: repeat;
-    background-size: 300px;
+    background-size: 400px;
     width: 100%;
     height: 100%;
 }
@@ -24,10 +24,13 @@ body {
     height: 300px;
 }
 
-#contenedor p:not(#difficulty p) {
-    color: aliceblue;
+#contenedor {
     font-size: x-large;
     font-weight: bold;
+}
+
+#contenedor p:not(#difficulty p):not(.win2) {
+    color: aliceblue;
 }
 
 #contenedor input {
@@ -73,7 +76,7 @@ h1 {
     left: 10px;
 }
 
-#difficulty p:not(#aviso) {  
+#difficulty p {  
     position: absolute;  
     text-align: start;
     top: -10px;
@@ -114,6 +117,53 @@ h1 {
     height: 10px;
     border-radius: 5px;
     background-color: red;
+}
+
+.win {
+    background-color: linear-gradient(
+      60deg,
+      #f79533,
+      #f37055,
+      #ef4e7b,
+      #a166ab,
+      #5073b8,
+      #1098ad,
+      #07b39b,
+      #6fba82
+    );
+}
+
+.win2 {
+    /* color: red; */
+    background: linear-gradient(
+      60deg,
+      #f79533,
+      #f37055,
+      #ef4e7b,
+      #a166ab,
+      #5073b8,
+      #1098ad,
+      #07b39b,
+      #6fba82
+    );
+}
+
+#score {
+  position: absolute;
+  text-align: center;
+  width: 100px; 
+  left: 10px;
+  height: 20px;
+  border: 1px solid aqua;
+  background-color: aliceblue;  
+}
+
+#restart {
+  position: absolute;
+  width: 100px; 
+  right: 10px;
+  height: 20px;
+  border: 1px solid aqua;
 }
 
 .bn29 {

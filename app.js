@@ -1,9 +1,8 @@
-const intentos = document.querySelector("#difficulty").firstChild, rango = document.querySelector("#difficulty").firstChild.nextSibling, numeroRecibido = document.getElementById("options"), play = document.getElementById("play"), anuncio = document.getElementById("anuncio");
-
+const intentos = document.querySelector("#difficulty").firstChild, rango = document.querySelector("#difficulty").firstChild.nextSibling, numeroRecibido = document.getElementById("options"), play = document.getElementById("play"), anuncio = document.getElementById("anuncio"), oport = document.querySelector("#contenedor").firstChild;
 let intentosD = 1, intentosU = 1, numeroSecreto = Math.floor(Math.random()*10)+1, adivina = 0, intentosNumber = 0;
 
 const show = () => {
-    anuncio.innerHTML = "Se ha cambiado el nivel del juego";
+    anuncio.innerHTML = "Se ha cambiado el nivel de dificultad";
     anuncio.style.opacity = 1;
     setTimeout(() => {
         anuncio.style.opacity = 0;
@@ -40,9 +39,7 @@ rango.addEventListener("change", function(){
     if(rango.value === "fifty") numeroSecreto = Math.floor(Math.random()*50)+1;
     if(rango.value === "hundred") numeroSecreto = Math.floor(Math.random()*100)+1;
     show();
-})
-console.log(typeof 5)
-console.log(numeroRecibido.value)
+});
 // if(numeroSecreto > 100) numeroSecreto = Math.floor(Math.random()*1000)+1;
 const aviso = function() {
     if(intentosD == 0) return 0
@@ -54,8 +51,14 @@ const aviso = function() {
     //Si acierta el número ingresado simplemente daremos el aviso, será un poco más especial el aviso si se logra al primer intento.
     if(!isNaN(numeroUsuario)) {
     if(numeroUsuario == numeroSecreto) {
-        if(intentosU == 0) alert(`Felicidades, ha encontrado el número ${numeroSecreto} con tan solo un intento, ¡enhorabuena!`)
-        if(intentosU >= 1) alert(`Bien hecho, es el número ${numeroSecreto}. \nHas acertado en ${intentosU} intentos.`);
+        if(intentosU == 1) {
+            oport.setAttribute("class", "win")
+            oport.innerHTML = `Felicidades, ha encontrado el número ${numeroSecreto} con tan solo un intento, ¡enhorabuena!`            
+        }; //alert(`Felicidades, ha encontrado el número ${numeroSecreto} con tan solo un intento, ¡enhorabuena!`)
+        if(intentosU > 1) {
+            oport.setAttribute("class", "win2");
+            oport.innerHTML = `Bien hecho, es el número ${numeroSecreto}. \nHas acertado en ${intentosU} intentos.`
+        } //alert(`Bien hecho, es el número ${numeroSecreto}. \nHas acertado en ${intentosU} intentos.`);
         adivina = 1;
     }
 
@@ -75,7 +78,8 @@ const aviso = function() {
         }
         //Avisar que se acabaron las oportunidades y cortar el código.
         if(intentosD < 1 && adivina !== 1) {
-            alert("Se te acabaron las oportunidades de adivinar, lo siento.");
+            oport.innerHTML = "Se te acabaron las oportunidades de adivinar, lo siento."
+            // alert("Se te acabaron las oportunidades de adivinar, lo siento.");
             return 0
         }
 
@@ -84,18 +88,27 @@ const aviso = function() {
         // if(numeroUsuario < numeroSecreto) alert(`Sigue intentándolo, te queda${letraN} ${intentosD} intento${letraS}.\nPista: el número es mayor.`);
         
         //Utilizando operador ternario para abreviar el código ("un poco")
-        numeroUsuario > numeroSecreto ? alert(`Sigue intentándolo, te queda${letraN} ${intentosD} intento${letraS}.\nPista: el número es menor.`) : alert(`Sigue intentándolo, te queda${letraN} ${intentosD} intento${letraS}.\nPista: el número es mayor.`);
+        // numeroUsuario > numeroSecreto ? alert(`Sigue intentándolo, te queda${letraN} ${intentosD} intento${letraS}.\nPista: el número es menor.`) : alert(`Sigue intentándolo, te queda${letraN} ${intentosD} intento${letraS}.\nPista: el número es mayor.`);
+        numeroUsuario > numeroSecreto ? oport.innerHTML = `Sigue intentándolo, te queda${letraN} ${intentosD} intento${letraS}.\nPista: el número es menor.`:oport.innerHTML = `Sigue intentándolo, te queda${letraN} ${intentosD} intento${letraS}.\nPista: el número es mayor.`;
     }
     }
 
     if(isNaN(numeroUsuario) && intentosD >= 1) {
-        alert("¡SOLO NÚMEROS!");
+        // alert("¡SOLO NÚMEROS!");
+        oport.innerHTML = "¡SOLO NÚMEROS!";
         intentosU += 1;
         intentosD -= 1;
         if(intentosD < 1 && adivina !== 1) {
-            alert("Se te acabaron las oportunidades de adivinar, lo siento.");
+            oport.innerHTML = "Se te acabaron las oportunidades de adivinar, lo siento.";
+            // alert("Se te acabaron las oportunidades de adivinar, lo siento.");
         }
     }
 };
 
 play.addEventListener("click", aviso);
+
+const cambia = (palabra) => {
+    const letras = palabra.firstChild;
+    console.log(letras)
+}
+cambia(oport)
