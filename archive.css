@@ -73,7 +73,7 @@ h1 {
     left: 10px;
 }
 
-#difficulty p {  
+#difficulty p:not(#aviso) {  
     position: absolute;  
     text-align: start;
     top: -10px;
@@ -84,6 +84,26 @@ h1 {
     font-weight: bold;
     font-size:large;
     color: aliceblue;
+}
+
+#anuncio {
+    position: absolute;
+    top: 220px;
+    border-radius: 5px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    background: linear-gradient(
+      60deg,
+      #f79533,
+      #f37055,
+      #ef4e7b,
+      #a166ab,
+      #5073b8,
+      #1098ad,
+      #07b39b,
+      #6fba82
+    );
 }
 
 #decide {
